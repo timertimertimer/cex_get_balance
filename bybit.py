@@ -17,8 +17,7 @@ class MyByBit:
         self.spot = self.session.get_coins_balance(accountType="SPOT")
         self.fund = self.session.get_coins_balance(accountType="FUND")
 
-    def get_balance(self) -> float:
-        print('ByBit balance')
+    def get_balance(self) -> dict:
         if self.spot['retMsg'] == 'success' and self.fund['retMsg'] == 'success':
             coins = self.spot['result']['balance'] + \
                 self.fund['result']['balance']
@@ -26,9 +25,9 @@ class MyByBit:
                 ticker = coin['coin']
                 amount = float(coin['walletBalance'])
                 if ticker not in self.finalized_assets:
-                    self.finalized_assets[ticker] = amount
+                    self.finalized_assets[ticker] = {'amount': amount}
                 else:
-                    self.finalized_assets[ticker] += amount
+                    self.finalized_assets[ticker]['amount'] += amount
         else:
             print(self.spot['retMsg'])
             print(self.fund['retMsg'])
@@ -48,13 +47,14 @@ class MyByBit:
                     price = None
                     print(response['retMsg'])
             if price is not None:
-                total = price * amount
+                total = price * amount['amount']
+                self.finalized_assets[ticker]['total'] = total
                 balance += total
-                print(f"{amount} {ticker} = {total}$")
             else:
-                print(f"{amount} {ticker} = unknown$")
+                self.finalized_assets[ticker]['total'] = -1
         print(f"Total balance: {balance}$")
-        return balance
+        self.finalized_assets['total'] = balance
+        return self.finalized_assets
 
 
 if __name__ == "__main__":

@@ -15,15 +15,13 @@ class MyKucoin:
 
     def get_balance(self) -> float:
         # main + trade
-        print('Kucoin balance')
         assets = self.client.get_account_list()
         for asset in assets:
-            if asset['currency'] not in self.finalized_assets:
-                self.finalized_assets[asset['currency']
-                                      ] = float(asset['balance'])
+            ticker = asset['currency']
+            if ticker not in self.finalized_assets:
+                self.finalized_assets[ticker] = {'amount': float(asset['balance'])}
             else:
-                self.finalized_assets[asset['currency']
-                                      ] += float(asset['balance'])
+                self.finalized_assets[ticker]['amount'] += float(asset['balance'])
 
         balance = 0
         for ticker, amount in self.finalized_assets.items():
@@ -32,11 +30,12 @@ class MyKucoin:
             else:
                 price = float(self.market.get_ticker(
                     f"{ticker}-USDT")['price'])
-            total = price * amount
+            total = price * amount['amount']
+            self.finalized_assets[ticker]['total'] = total
             balance += total
-            print(f"{amount} {ticker} = {total}$")
         print(f"Total balance: {balance}$")
-        return balance
+        self.finalized_assets['total'] = balance
+        return self.finalized_assets
 
 
 if __name__ == "__main__":
