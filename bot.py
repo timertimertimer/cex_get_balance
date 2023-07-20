@@ -1,11 +1,13 @@
 import os
 import telebot
+from config import envs
 from bsc import MyBinance
 from kcn import MyKucoin
 from bybit import MyByBit
+from okex import MyOkex
 
 bot = telebot.TeleBot(
-    os.getenv('CEX_GET_BALANCE_BOT_TOKEN'), parse_mode=None)
+    os.getenv('CEX_GET_BALANCE_BOT_TOKEN') or envs['CEX_GET_BALANCE_BOT_TOKEN'], parse_mode=None)
 
 
 @bot.message_handler(commands=['get_balance'])
@@ -14,10 +16,12 @@ def get_balance(message):
     bybit = MyByBit().get_balance()
     kucoin = MyKucoin().get_balance()
     binance = MyBinance().get_balance()
+    okex = MyOkex().get_balance()
     cexs = {
         'Binance': binance,
         'Kucoin': kucoin,
         'ByBit': bybit,
+        'OKX': okex,
     }
     balance = 0
     for cex_name, cex_assets in cexs.items():

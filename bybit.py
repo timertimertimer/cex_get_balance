@@ -1,9 +1,8 @@
-import os
 from pybit.unified_trading import HTTP
-from config import usd_tickers
+from config import *
 
-api_key = os.getenv('BYBIT_API_KEY')
-api_secret = os.getenv('BYBIT_API_SECRET')
+api_key = os.getenv('BYBIT_API_KEY') or envs['BYBIT_API_KEY']
+api_secret = os.getenv('BYBIT_API_SECRET') or envs['BYBIT_API_SECRET']
 
 
 class MyByBit:
@@ -20,7 +19,7 @@ class MyByBit:
     def get_balance(self) -> dict:
         if self.spot['retMsg'] == 'success' and self.fund['retMsg'] == 'success':
             coins = self.spot['result']['balance'] + \
-                self.fund['result']['balance']
+                    self.fund['result']['balance']
             for coin in coins:
                 ticker = coin['coin']
                 amount = float(coin['walletBalance'])

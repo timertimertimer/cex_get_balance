@@ -1,10 +1,9 @@
-import os
-from config import usd_tickers
+from config import *
 from kucoin.client import User, Market
 
-api_key = os.getenv('KUCOIN_API_KEY')
-api_secret = os.getenv('KUCOIN_API_SECRET')
-api_passphrase = os.getenv('KUCOIN_API_PASSPHRASE')
+api_key = os.getenv('KUCOIN_API_KEY') or envs['KUCOIN_API_KEY']
+api_secret = os.getenv('KUCOIN_API_SECRET') or envs['KUCOIN_API_SECRET']
+api_passphrase = os.getenv('KUCOIN_API_PASSPHRASE') or envs['KUCOIN_API_PASSPHRASE']
 
 
 class MyKucoin:

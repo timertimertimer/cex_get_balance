@@ -1,8 +1,8 @@
-import os
 from binance.spot import Spot as Client
+from config import *
 
-api_key = os.getenv('BINANCE_API_KEY')
-api_secret = os.getenv('BINANCE_API_SECRET')
+api_key = os.getenv('BINANCE_API_KEY') or envs['BINANCE_API_KEY']
+api_secret = os.getenv('BINANCE_API_SECRET') or envs['BINANCE_API_SECRET']
 
 
 class MyBinance:
