@@ -11,3 +11,4 @@ websocket-client==1.6.0
 websockets==11.0.3
 telebot~=0.0.5
 python-dotenv~=1.0.0
+python-okx==0.2.0
