@@ -11,7 +11,7 @@ passphrase = os.getenv('OKX_API_PASSPHRASE')
 class MyOkex:
     def __init__(self):
         self.finalized_assets = dict()
-        args = (api_key, api_secret, passphrase, True, '0', 'https://www.okx.com', False)
+        args = (api_key, api_secret, passphrase, False, '0', 'https://www.okx.com', False)
         self.trading = AccountAPI(*args)
         self.funding = FundingAPI(*args)
         self.market = MarketAPI(*args)
