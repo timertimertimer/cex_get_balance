@@ -1,5 +1,4 @@
-import os
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 
-envs = dotenv_values('.env')
+load_dotenv()
 usd_tickers = ['USDT', 'BUSD', 'USDC']

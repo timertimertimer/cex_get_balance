@@ -1,8 +1,9 @@
+import os
 from binance.spot import Spot as Client
 from config import *
 
-api_key = os.getenv('BINANCE_API_KEY') or envs['BINANCE_API_KEY']
-api_secret = os.getenv('BINANCE_API_SECRET') or envs['BINANCE_API_SECRET']
+api_key = os.getenv('BINANCE_API_KEY')
+api_secret = os.getenv('BINANCE_API_SECRET')
 
 
 class MyBinance:
@@ -10,7 +11,7 @@ class MyBinance:
         self.client = Client(api_key, api_secret)
         self.finalized_assets = dict()
 
-    def get_balance(self) -> float:
+    def get_balance(self) -> dict:
         balance = 0
 
         # main + funding

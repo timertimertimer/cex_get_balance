@@ -6,12 +6,14 @@ from bsc import MyBinance
 from kcn import MyKucoin
 from bybit import MyByBit
 from okex import MyOkex
+from dotenv import load_dotenv
 
-bot = telebot.TeleBot(
-    os.getenv('CEX_GET_BALANCE_BOT_TOKEN') or envs['CEX_GET_BALANCE_BOT_TOKEN'], parse_mode=None)
+load_dotenv()
+bot = telebot.TeleBot(os.getenv('CEX_GET_BALANCE_BOT_TOKEN') or envs['CEX_GET_BALANCE_BOT_TOKEN'], parse_mode=None)
 
 markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 markup.add(types.KeyboardButton("/get_balance"))
+
 
 @bot.message_handler(commands=['get_balance'])
 def get_balance(message):
@@ -32,7 +34,7 @@ def get_balance(message):
         for ticker, value in cex_assets.items():
             if ticker != 'total':
                 amount = value['amount']
-                total_usd = value['total']        
+                total_usd = value['total']
                 s += f'{ticker} {amount} = {total_usd:.2f}$\n'
             else:
                 s += f'Total balance - {value:.2f}$'
