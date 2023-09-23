@@ -1,7 +1,6 @@
 import os
 import telebot
 from telebot import types
-from config import envs
 from bsc import MyBinance
 from kcn import MyKucoin
 from bybit import MyByBit
@@ -9,7 +8,7 @@ from okex import MyOkex
 from dotenv import load_dotenv
 
 load_dotenv()
-bot = telebot.TeleBot(os.getenv('CEX_GET_BALANCE_BOT_TOKEN') or envs['CEX_GET_BALANCE_BOT_TOKEN'], parse_mode=None)
+bot = telebot.TeleBot(os.getenv('CEX_GET_BALANCE_BOT_TOKEN'), parse_mode=None)
 
 markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 markup.add(types.KeyboardButton("/get_balance"))

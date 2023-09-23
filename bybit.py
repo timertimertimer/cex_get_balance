@@ -1,8 +1,8 @@
 from pybit.unified_trading import HTTP
 from config import *
 
-api_key = os.getenv('BYBIT_API_KEY') or envs['BYBIT_API_KEY']
-api_secret = os.getenv('BYBIT_API_SECRET') or envs['BYBIT_API_SECRET']
+api_key = os.getenv('BYBIT_API_KEY')
+api_secret = os.getenv('BYBIT_API_SECRET')
 
 
 class MyByBit:

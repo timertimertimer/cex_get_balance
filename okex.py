@@ -3,9 +3,9 @@ from okx.Funding import FundingAPI
 from okx.MarketData import MarketAPI
 from config import *
 
-api_key = os.getenv('OKX_API_KEY') or envs['OKX_API_KEY']
-api_secret = os.getenv('OKX_API_SECRET') or envs['OKX_API_SECRET']
-passphrase = os.getenv('OKX_API_PASSPHRASE') or envs['OKX_API_PASSPHRASE']
+api_key = os.getenv('OKX_API_KEY')
+api_secret = os.getenv('OKX_API_SECRET')
+passphrase = os.getenv('OKX_API_PASSPHRASE')
 
 
 class MyOkex:
